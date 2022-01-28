@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+
+		{
+			"type": "npm",
+			"script": "start",
+			"path": "/react-app/",
+			"problemMatcher": [],
+			"label": "⚛️ start",
+		},
+
+		{
+			"type": "shell",
+			"command": "firebase deploy --only hosting",
+			"label": "🔥👍 hosting",
+		},
+
+	]
+}

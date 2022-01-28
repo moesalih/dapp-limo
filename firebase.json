@@ -1,0 +1,17 @@
+{
+	"hosting": {
+		"predeploy": "pushd react-app && npm run build && popd",
+		"public": "react-app/build",
+		"ignore": [
+			"firebase.json",
+			"**/.*",
+			"**/node_modules/**"
+		],
+		"rewrites": [
+			{
+				"source": "**",
+				"destination": "/index.html"
+			}
+		]
+	}
+}
