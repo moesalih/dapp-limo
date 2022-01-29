@@ -39,7 +39,7 @@ function App() {
 
 			<Navbar className="mb-3" >
 				<Container >
-					<Navbar.Brand className="fw-600 text-uppercase">dapp <span className="text-secondary">limo</span></Navbar.Brand>
+					<Navbar.Brand className="fw-900 text-uppercase">dapp <span className="text-secondary">limo</span></Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" >
 						<Nav className="">
@@ -57,18 +57,18 @@ function App() {
 				</Container>
 			</Navbar>
 
-			<Container className="text-center">
+			<Container className="text-center mb-5">
 
 				{categories.map(c =>
 					<div key={c}>
 						{dapps.length > 0 && dapps.filter(item => item.categories.includes(c)).length > 0 &&
-							<div className="fw-700 my-3 opacity-50">{c}</div>
+							<div className="small fw-700 mt-4 mb-1 opacity-50">{c}</div>
 						}
 						<div>
 							{dapps.length > 0 && dapps.filter(item => item.categories.includes(c)).map((item, index) =>
-								<div className="d-inline-block text-center mx-2 mb-4" style={{ width: '6rem' }} key={index}>
-									<a href={item.URL} target="_blank" className="d-block px-2 mb-2"><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden mw-100" /></a>
-									<a href={item.URL} target="_blank" className="fw-500 small text-decoration-none text-reset">{item.Dapp}</a>
+								<div className="d-inline-block bg-light text-center p-2 rounded m-1" style={{ width: '6rem' }} key={index}>
+									<a href={item.URL} target="_blank" className="d-block p-1 mb-2"><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden mw-100" /></a>
+									<a href={item.URL} target="_blank" className="fw-500 text-decoration-none text-reset">{item.Dapp}</a>
 									<div>{item.networks.map(n => <img key={n} src={networkIcon(n)} title={n} style={{ height: '1em', margin: '.1em' }} />)}</div>
 								</div>
 							)}
