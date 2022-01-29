@@ -43,13 +43,13 @@ function App() {
 
 			<Navbar className="mb-3" >
 				<Container >
-					<Navbar.Brand className="fw-900 text-uppercase">dapp <span className="text-secondary">limo</span></Navbar.Brand>
+					<Navbar.Brand className="fw-900 text-uppercase">dapp <span className="opacity-50">limo</span></Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" >
 						<Nav className="">
 							<Dropdown as={NavItem} align="end">
-								<Dropdown.Toggle as={NavLink} className="small fw-500">{currentNetwork?<><img src={networkIcon(currentNetwork)} title={currentNetwork} className="align-text-top me-2" style={{ height: '1.3em' }} />{currentNetwork}</>:'All Networks'} </Dropdown.Toggle>
-								<Dropdown.Menu className="shadow">
+								<Dropdown.Toggle as={NavLink} className="small fw-500">{currentNetwork ? <><img src={networkIcon(currentNetwork)} title={currentNetwork} className="align-text-top me-2" style={{ height: '1.3em' }} />{currentNetwork}</> : 'All Networks'} </Dropdown.Toggle>
+								<Dropdown.Menu className="shadow ">
 									<Dropdown.Item className="small" onClick={() => { setCurrentNetwork(null) }}>All Networks</Dropdown.Item>
 									{networks && networks.map(n => <Dropdown.Item key={n} className="small" onClick={() => { setCurrentNetwork(n) }} ><img src={networkIcon(n)} title={n} className="align-text-top me-2" style={{ height: '1.3em' }} />{n}</Dropdown.Item>)}
 								</Dropdown.Menu>
@@ -67,14 +67,18 @@ function App() {
 				{categories.map(c =>
 					<div key={c}>
 						{currentNetworkDapps().length > 0 && currentNetworkDapps().filter(item => item.categories.includes(c)).length > 0 &&
-							<div className="small fw-700 text-secondary opacity-75 mt-4 mb-1 ">{c}</div>
+							<div className="d-flex justify-content-center align-items-center text-secondary opacity-75 mt-4 mb-1">
+								<hr className="w-25  opacity-10 m-0" />
+								<div className="small fw-700   mx-3 ">{c}</div>
+								<hr className="w-25  opacity-10 m-0" />
+							</div>
 						}
 						<div>
 							{currentNetworkDapps().length > 0 && currentNetworkDapps().filter(item => item.categories.includes(c)).map((item, index) =>
-								<div className="d-inline-block bg-light text-center p-2 rounded m-1" style={{ width: '6rem' }} key={index}>
-									<a href={item.URL} target="_blank" className="d-block p-1 mb-2"><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden mw-100" /></a>
+								<div className="d-inline-block bg-light  text-center p-2 rounded m-1" style={{ width: '6.5rem' }} key={index}>
+									<a href={item.URL} target="_blank" className="d-block p-2 mb-1"><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden mw-100" /></a>
 									<a href={item.URL} target="_blank" className="fw-500 text-decoration-none text-reset">{item.Dapp}</a>
-									<div>{item.networks.map(n => <img key={n} src={networkIcon(n)} title={n} style={{ height: '1em', margin: '.1em' }} />)}</div>
+									<div className="mb-1">{item.networks.map(n => <img key={n} src={networkIcon(n)} title={n} className="rounded-circle" style={{ height: '.9em', margin: '.1em' }} />)}</div>
 								</div>
 							)}
 						</div>
