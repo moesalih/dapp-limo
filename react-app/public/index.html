@@ -6,7 +6,7 @@
 	<link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/cyclone_1f300.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="theme-color" content="#000000" />
-	<meta name="description" content="Minimal dapp directory for Ethereum" />
+	<meta name="description" content="Dapp directory for the Ethereum ecosystem" />
 	<link rel="apple-touch-icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/cyclone_1f300.png" />
 	<title>DAPP LIMO</title>
 </head>
@@ -14,6 +14,30 @@
 <body>
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 	<div id="root"></div>
+
+	<script type="module">
+		// Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js";
+		// TODO: Add SDKs for Firebase products that you want to use
+		// https://firebase.google.com/docs/web/setup#available-libraries
+
+		// Your web app's Firebase configuration
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+		const firebaseConfig = {
+			apiKey: "AIzaSyAGxsl41Gx_LodQxBbJkfRmlVPrJGNtH08",
+			authDomain: "dapp-limo.firebaseapp.com",
+			projectId: "dapp-limo",
+			storageBucket: "dapp-limo.appspot.com",
+			messagingSenderId: "626407272032",
+			appId: "1:626407272032:web:89161399c51f238dc79d05",
+			measurementId: "G-QDD74Z6RSM"
+		};
+
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const analytics = getAnalytics(app);
+	</script>
 </body>
 
 </html>

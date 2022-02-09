@@ -90,6 +90,8 @@ function App() {
 				<div className="my-5 small text-muted">
 					Created by <a href="https://twitter.com/moesalih_" target="_blank" className="text-reset text-decoration-none fw-700 my-2">MOΞ</a>
 					<span className="mx-2 text-black-50">·</span>
+					<a href="https://twitter.com/dapplimo" target="_blank" className="text-reset text-decoration-none  ">Twitter</a>
+					<span className="mx-2 text-black-50">·</span>
 					<a href="https://docs.google.com/spreadsheets/d/1fqGr2kD53tytTp4QUWKw-Ui6D6tJueBYrhJflvK4ERs/edit#gid=75921066" target="_blank" className="text-reset text-decoration-none  ">Data</a>
 					<span className="mx-2 text-black-50">·</span>
 					<a href="https://github.com/moesalih/dapp-limo" target="_blank" className="text-reset text-decoration-none  ">GitHub</a>
