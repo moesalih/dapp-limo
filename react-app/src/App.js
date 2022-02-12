@@ -41,8 +41,8 @@ function App() {
 
 	function dappBlock(item, index) {
 		return (
-			<div className="d-inline-block bg-light align-top text-center p-2 rounded m-1" style={{ width: '6.5rem' }} key={index}>
-				<a href={item.URL} target="_blank" className="d-block p-2 mb-1"><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden mw-100" /></a>
+			<div className="d-inline-block bg-light align-top text-center pb-2 p-1 rounded m-1" style={{ width: '6.8rem' }} key={index}>
+				<a href={item.URL} target="_blank" className="d-block p-3 pb-2 "><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden mw-100" /></a>
 				<a href={item.URL} target="_blank" className="d-block fw-600 text-decoration-none text-reset">{item.Dapp}</a>
 				<div className="text-secondary smaller">{item.Description}</div>
 				<div className="mb-1">{item.networks.map(n => <img key={n} src={networkIcon(n)} title={n} className="rounded-circle" style={{ height: '.9em', margin: '.1em' }} />)}</div>
