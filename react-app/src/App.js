@@ -62,10 +62,10 @@ function App() {
 					<Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" >
 						<Nav className="">
 							<Dropdown as={NavItem} align="end">
-								<Dropdown.Toggle as={NavLink} className="small fw-500">{currentNetwork ? <><img src={networkIcon(currentNetwork)} title={currentNetwork} className="align-text-top me-2" style={{ height: '1.3em' }} />{currentNetwork}</> : 'All Networks'} </Dropdown.Toggle>
+								<Dropdown.Toggle as={NavLink} className="small fw-500">{currentNetwork ? <><img src={networkIcon(currentNetwork)} title={currentNetwork} className="align-text-top rounded-circle me-2" style={{ height: '1.3em' }} />{currentNetwork}</> : 'All Networks'} </Dropdown.Toggle>
 								<Dropdown.Menu className="shadow ">
 									<Dropdown.Item className="small" onClick={() => { setCurrentNetwork(null) }}>All Networks</Dropdown.Item>
-									{networks && networks.map(n => <Dropdown.Item key={n} className="small" onClick={() => { setCurrentNetwork(n) }} ><img src={networkIcon(n)} title={n} className="align-text-top me-2" style={{ height: '1.3em' }} />{n}</Dropdown.Item>)}
+									{networks && networks.map(n => <Dropdown.Item key={n} className="small" onClick={() => { setCurrentNetwork(n) }} ><img src={networkIcon(n)} title={n} className="align-text-top rounded-circle me-2" style={{ height: '1.3em' }} />{n}</Dropdown.Item>)}
 								</Dropdown.Menu>
 							</Dropdown>
 						</Nav>
