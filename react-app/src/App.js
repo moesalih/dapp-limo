@@ -30,22 +30,48 @@ function App() {
 			dapp.networks = networks.filter(n => dapp['Network: ' + n] == 'TRUE')
 			dapp.categories = categories.filter(n => dapp['Category: ' + n] == 'TRUE')
 		})
-		console.log(result);
+		console.log(result)
 		setNetworks(networks)
-		setCategories(categories)
-		setDapps(result);
+		setCategories(['Favorites', ...categories])
+
+		refreshFavoriteDapps(result, categories)
+		setDapps(result)
 	}, [])
 
 	let currentNetworkDapps = () => currentNetwork ? dapps.filter(dapp => dapp.networks.includes(currentNetwork)) : dapps
 
+	let getFavorites = () => JSON.parse(window.localStorage.getItem('favorites')) || []
+	let setFavorites = (favorites) => window.localStorage.setItem('favorites', JSON.stringify(favorites))
+	let isFavorite = (item) => getFavorites().includes(item)
+	let toggleFavorite = (item) => {
+		let favorites = getFavorites()
+		if (favorites.includes(item)) favorites = favorites.filter(i => i != item)
+		else favorites.push(item)
+		console.log('favorites', favorites)
+		setFavorites(favorites)
+
+		refreshFavoriteDapps(dapps, categories)
+		setDapps([...dapps])
+	}
+	let refreshFavoriteDapps = (dapps, categories) => {
+		dapps.forEach(dapp => {
+			dapp.categories = categories.filter(n => dapp['Category: ' + n] == 'TRUE')
+			if (isFavorite(dapp.Dapp)) {
+				dapp.categories.push('Favorites')
+			}
+		})
+	}
 
 	function dappBlock(item, index) {
 		return (
-			<div className="d-inline-block bg-light align-top text-center pb-2 p-1 rounded m-1" style={{ width: '6.8rem' }} key={index}>
-				<a href={item.URL} target="_blank" className="d-block p-3 pb-2 "><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden w-100" /></a>
+			<div className="d-inline-block bg-light align-top text-center pb-2 p-1 rounded m-1 position-relative" style={{ width: '6.8rem' }} key={index}>
+				<div className="p-3 pb-2"><a href={item.URL} target="_blank" className=""><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden w-100" /></a></div>
 				<a href={item.URL} target="_blank" className="d-block fw-600 text-decoration-none text-reset lh-sm mb-1">{item.Dapp}</a>
 				<div className="text-secondary smaller lh-sm mb-1">{item.Description}</div>
 				<div className="mb-1">{item.networks.map(n => <img key={n} src={networkIcon(n)} title={n} className="rounded-circle" style={{ height: '.9em', margin: '.1em' }} />)}</div>
+				<div className="position-absolute top-0 end-0 smaller text-secondary opacity-50 lh-1 p-1">
+					<i className={isFavorite(item.Dapp) ? "bi bi-star-fill" : "bi bi-star"} onClick={() => toggleFavorite(item.Dapp)}></i>
+				</div>
 			</div>
 		)
 	}
@@ -96,7 +122,7 @@ function App() {
 
 
 				<div className="my-5 small text-muted">
-					Created by <a href="https://twitter.com/moesalih_" target="_blank" className="text-reset text-decoration-none fw-700 my-2">MOΞ</a>
+					Created by <a href="https://twitter.com/0xMoe_" target="_blank" className="text-reset text-decoration-none fw-700 my-2">MOΞ</a>
 					<span className="mx-2 text-black-50">·</span>
 					<a href="https://twitter.com/dapplimo" target="_blank" className="text-reset text-decoration-none  ">Twitter</a>
 					<span className="mx-2 text-black-50">·</span>
