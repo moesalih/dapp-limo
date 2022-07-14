@@ -23,6 +23,7 @@ function App() {
 			columns: true,
 			skip_empty_lines: true
 		})
+		result = result.filter(item => !!item.Dapp)
 		let keys = Object.keys(result[0])
 		let networks = keys.filter(key => key.includes('Network: ')).map(key => key.replace('Network: ', ''))
 		let categories = keys.filter(key => key.includes('Category: ')).map(key => key.replace('Category: ', ''))
