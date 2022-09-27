@@ -108,10 +108,10 @@ function App() {
 				{categories.map(c =>
 					<div key={c}>
 						{currentNetworkDapps().length > 0 && currentNetworkDapps().filter(item => item.categories.includes(c)).length > 0 &&
-							<div className="d-flex justify-content-center align-items-center text-secondary opacity-75 mt-4 mb-1">
-								<hr className="w-25  opacity-10 m-0" />
-								<div className="small fw-700   mx-3 ">{c}</div>
-								<hr className="w-25  opacity-10 m-0" />
+							<div className="d-flex justify-content-center align-items-center text-secondary opacity-75 mt-4 mt-md-5 mb-2 mb-md-3">
+								{/* <hr className="w-25  opacity-10 m-0" /> */}
+								<div className="smallx fw-600   mx-3 text-nowrap ">{c}</div>
+								{/* <hr className="w-25  opacity-10 m-0" /> */}
 							</div>
 						}
 						<div>
@@ -122,7 +122,7 @@ function App() {
 
 
 
-				<div className="my-5 small text-muted">
+				<div className="my-5 py-5 small text-muted">
 					Created by <a href="https://twitter.com/0xMoe_" target="_blank" className="text-reset text-decoration-none fw-700 my-2">MOΞ</a>
 					<span className="mx-2 text-black-50">·</span>
 					<a href="https://twitter.com/dapplimo" target="_blank" className="text-reset text-decoration-none  ">Twitter</a>
