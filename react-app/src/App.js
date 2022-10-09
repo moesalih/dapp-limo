@@ -65,13 +65,13 @@ function App() {
 
 	function dappBlock(item, index) {
 		return (
-			<div className="d-inline-block bg-light align-top text-center pb-2 p-1 rounded m-1 position-relative" style={{ width: '6.8rem' }} key={index}>
-				<div className="p-3 pb-2"><a href={item.URL} target="_blank" className=""><img src={item.Icon} className="border shadow-sm rounded-circle overflow-hidden w-100" /></a></div>
-				<a href={item.URL} target="_blank" className="d-block fw-600 text-decoration-none text-reset lh-sm mb-1">{item.Dapp}</a>
+			<div className="d-inline-block bg-secondary  align-top text-center pb-2 p-1 rounded m-1 position-relative" style={{ width: '6.8rem', '--bs-bg-opacity': .05 }} key={index}>
+				<div className="p-3 pb-2"><a href={item.URL} target="_blank" className=""><img src={item.Icon} className="borderx shadow-sm rounded-circle bg-light overflow-hidden w-100" /></a></div>
+				<a href={item.URL} target="_blank" className="d-block fw-600 text-decoration-none text-resetx text-body-emphasis lh-sm mb-1">{item.Dapp}</a>
 				<div className="text-secondary smaller lh-sm mb-1">{item.Description}</div>
 				<div className="mb-1">{item.networks.map(n => <img key={n} src={networkIcon(n)} title={n} className="rounded-circle" style={{ height: '.9em', margin: '.1em' }} />)}</div>
 				<div className="position-absolute top-0 end-0 smaller text-secondary opacity-50 lh-1 p-1">
-					<i className={isFavorite(item.Dapp) ? "bi bi-star-fill" : "bi bi-star"} onClick={() => toggleFavorite(item.Dapp)}></i>
+					<i className={isFavorite(item.Dapp) ? "bi bi-star-fill" : "bi bi-star"} onClick={() => toggleFavorite(item.Dapp)} role="button"></i>
 				</div>
 			</div>
 		)
