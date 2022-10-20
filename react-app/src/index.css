@@ -17,3 +17,7 @@ body {
 [role=button] {
 	outline: none;
 }
+
+input::placeholder {
+	opacity: 0.5 !important;
+}

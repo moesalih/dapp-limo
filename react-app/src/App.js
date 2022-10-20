@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Navbar, Nav, NavDropdown, Dropdown, NavItem, NavLink, Spinner } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Dropdown, NavItem, NavLink, Spinner, Form } from 'react-bootstrap';
 import { parse } from 'csv-parse/browser/esm/sync';
 import './App.css';
 
@@ -16,6 +16,12 @@ function App() {
 	const [categories, setCategories] = useState([]);
 	const [networks, setNetworks] = useState([]);
 	const [currentNetwork, setCurrentNetwork] = useState(null);
+	const [searchText, setSearchText] = useState('')
+
+	let filteredDapps = [...dapps]
+	if (currentNetwork) filteredDapps = filteredDapps.filter(dapp => dapp.networks.includes(currentNetwork))
+	if (searchText) filteredDapps = filteredDapps.filter(dapp => (`${dapp.Dapp} ${dapp.Description} ${dapp.categories.join(' ')}`).toLowerCase().includes(searchText.toLowerCase()))
+
 
 	const [gasPrice, setGasPrice] = useState(0)
 	useEffect(async () => {
@@ -46,7 +52,6 @@ function App() {
 		setDapps(result)
 	}, [])
 
-	let currentNetworkDapps = () => currentNetwork ? dapps.filter(dapp => dapp.networks.includes(currentNetwork)) : dapps
 
 	let getFavorites = () => JSON.parse(window.localStorage.getItem('favorites')) || []
 	let setFavorites = (favorites) => window.localStorage.setItem('favorites', JSON.stringify(favorites))
@@ -94,8 +99,9 @@ function App() {
 					<Navbar.Brand className="fw-900 text-uppercase">dapp <span className="opacity-50">limo</span></Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" >
-						<Nav className="">
-							{gasPrice > 0 && <Navbar.Text className='smallx fw-500 px-3 opacity-50' title='Ethereum Base Fee (Gwei)'><i className='bi bi-fuel-pump-fill' /> {gasPrice}</Navbar.Text>}
+						<Nav className="align-items-center">
+							{gasPrice > 0 && <Navbar.Text className='smallx fw-500x px-3 opacity-50 text-nowrap d-none d-md-inline-block' title='Ethereum Base Fee (Gwei)'><i className='bi bi-fuel-pump-fill' /> {gasPrice}</Navbar.Text>}
+							<input type="text" placeholder="Search" className="form-control me-2 rounded-pill border d-none d-md-inline-block" aria-label="Search" style={{ height: '2em', boxShadow: '0 0 0 #fff' }}  value={searchText} onChange={e => setSearchText(e.target.value)}  />
 							<Dropdown as={NavItem} align="end">
 								<Dropdown.Toggle as={NavLink} className="small fw-500">{currentNetwork ? <><img src={networkIcon(currentNetwork)} title={currentNetwork} className="align-text-top rounded-circle me-2" style={{ height: '1.3em' }} />{currentNetwork}</> : 'All Networks'} </Dropdown.Toggle>
 								<Dropdown.Menu className="shadow ">
@@ -115,7 +121,7 @@ function App() {
 
 				{categories.map(c =>
 					<div key={c}>
-						{currentNetworkDapps().length > 0 && currentNetworkDapps().filter(item => item.categories.includes(c)).length > 0 &&
+						{filteredDapps.length > 0 && filteredDapps.filter(item => item.categories.includes(c)).length > 0 &&
 							<div className="d-flex justify-content-center align-items-center text-secondary opacity-75 mt-4 mt-md-5 mb-2 mb-md-3">
 								{/* <hr className="w-25  opacity-10 m-0" /> */}
 								<div className="smallx fw-600   mx-3 text-nowrap ">{c}</div>
@@ -123,7 +129,7 @@ function App() {
 							</div>
 						}
 						<div>
-							{currentNetworkDapps().length > 0 && currentNetworkDapps().filter(item => item.categories.includes(c)).map(dappBlock)}
+							{filteredDapps.length > 0 && filteredDapps.filter(item => item.categories.includes(c)).map(dappBlock)}
 						</div>
 					</div>
 				)}
