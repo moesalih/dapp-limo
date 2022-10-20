@@ -17,6 +17,13 @@ function App() {
 	const [networks, setNetworks] = useState([]);
 	const [currentNetwork, setCurrentNetwork] = useState(null);
 
+	const [gasPrice, setGasPrice] = useState(0)
+	useEffect(async () => {
+		let { data } = await axios.get('https://api.etherscan.io/api?module=gastracker&action=gasoracle')
+		if (data && data.result && data.result.SafeGasPrice) setGasPrice(parseInt(data.result.SafeGasPrice))
+	}, [])
+
+
 	useEffect(async () => {
 		let response = await axios.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRV8CRwlasJ_ECVNHr_YALwJAOR7wEeNtVyQ8o9IGwoSqCslG2BIz_ci-SBTcBS3AU3quYmA3ixqofL/pub?gid=75921066&single=true&output=csv')
 		let result = parse(response.data, {
@@ -65,8 +72,8 @@ function App() {
 
 	function dappBlock(item, index) {
 		return (
-			<div className="d-inline-block bg-secondary  align-top text-center pb-2 p-1 rounded m-1 position-relative" style={{ width: '6.8rem', '--bs-bg-opacity': .05 }} key={index}>
-				<div className="p-3 pb-2"><a href={item.URL} target="_blank" className=""><img src={item.Icon} className="borderx shadow-sm rounded-circle bg-light overflow-hidden w-100" /></a></div>
+			<div className="d-inline-block bg-body-tertiary  align-top text-center pb-2 p-1 rounded m-1 position-relative" style={{ width: '6.8rem' }} key={index}>
+				<div className="p-3 pb-2"><a href={item.URL} target="_blank" className=""><img src={item.Icon} className="shadow-sm rounded-circle overflow-hidden w-100" /></a></div>
 				<a href={item.URL} target="_blank" className="d-block fw-600 text-decoration-none text-resetx text-body-emphasis lh-sm mb-1">{item.Dapp}</a>
 				<div className="text-secondary smaller lh-sm mb-1">{item.Description}</div>
 				<div className="mb-1">{item.networks.map(n => <img key={n} src={networkIcon(n)} title={n} className="rounded-circle" style={{ height: '.9em', margin: '.1em' }} />)}</div>
@@ -82,12 +89,13 @@ function App() {
 	return (
 		<div className="">
 
-			<Navbar className="mb-3" >
+			<Navbar className="mb-3 user-select-none" >
 				<Container >
 					<Navbar.Brand className="fw-900 text-uppercase">dapp <span className="opacity-50">limo</span></Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" >
 						<Nav className="">
+							{gasPrice > 0 && <Navbar.Text className='smallx fw-500 px-3 opacity-50' title='Ethereum Base Fee (Gwei)'><i className='bi bi-fuel-pump-fill' /> {gasPrice}</Navbar.Text>}
 							<Dropdown as={NavItem} align="end">
 								<Dropdown.Toggle as={NavLink} className="small fw-500">{currentNetwork ? <><img src={networkIcon(currentNetwork)} title={currentNetwork} className="align-text-top rounded-circle me-2" style={{ height: '1.3em' }} />{currentNetwork}</> : 'All Networks'} </Dropdown.Toggle>
 								<Dropdown.Menu className="shadow ">
